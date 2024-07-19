@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Television implements Comparable<Television> {
     public static final int MIN_VOLUME = 0;
     public static final int MAX_VOLUME = 100;
+
     public static final int MIN_CHANNEL = 1;
     public static final int MAX_CHANNEL = 999;
 
@@ -108,8 +109,8 @@ public class Television implements Comparable<Television> {
         boolean result = false;
         if (obj instanceof Television) {
             Television other = (Television) obj;
-            result = Objects.equals(this.getBrand(), other.getBrand()) &&
-                     Objects.equals(this.getVolume(), other.getVolume()) &&
+            result = Objects.equals(this.getBrand(),   other.getBrand()) &&
+                     Objects.equals(this.getVolume(),  other.getVolume()) &&
                      Objects.equals(this.getDisplay(), other.getDisplay());
         }
         return result;
