@@ -51,19 +51,17 @@ class Board {
      *
      * This could mean fetching an existing DuckRacer from racerMap,
      * or we might need to create a "new DuckRacer()", put() it in the map,
-     * and then make it win().
-     *
-     * Either way, it needs to win().
+     * and then make it win().  Either way, it needs to win().
      */
     public void update(int id, Reward reward) {
         DuckRacer racer = null;
 
-        if (racerMap.containsKey(id)) {
-            racer = racerMap.get(id);
+        if (racerMap.containsKey(id)) {                       // already in racerMap
+            racer = racerMap.get(id);                         // fetch it
         }
         else {
-            racer = new DuckRacer(id, studentIdMap.get(id));
-            racerMap.put(id, racer);
+            racer = new DuckRacer(id, studentIdMap.get(id));  // not in map, create new
+            racerMap.put(id, racer);                          // insert it
         }
         racer.win(reward);
     }
@@ -75,10 +73,17 @@ class Board {
     public void show() {
         Collection<DuckRacer> racers = racerMap.values();
 
-        // print title and column headings
+        String header = """
+                Duck Race Results
+                =================
+                
+                id    name      wins    rewards
+                --    ----      ----    -------
+                """;
+        System.out.println(header);
 
         for (DuckRacer racer : racers) {
-            System.out.printf("%s  %s  %s  %s\n",
+            System.out.printf("%s     %s     %s      %s\n",
                     racer.getId(), racer.getName(), racer.getWins(), racer.getRewards());
         }
     }
