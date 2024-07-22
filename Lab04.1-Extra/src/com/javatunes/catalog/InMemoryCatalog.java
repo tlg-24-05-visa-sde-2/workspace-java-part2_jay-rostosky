@@ -189,6 +189,9 @@ public class InMemoryCatalog implements Catalog {
     /**
      * TASK: find the average price of items in the specified genre (MusicCategory).
      */
+    public double averagePriceInCategory(MusicCategory category) {
+        return 0.0;
+    }
 
 
     /**
