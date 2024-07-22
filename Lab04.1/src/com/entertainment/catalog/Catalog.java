@@ -28,16 +28,41 @@ public class Catalog {
      * A no-matches result should be an empty collection (not null).
      */
     public static Collection<Television> findByBrand(String brand) {
-        return null;
+        Collection<Television> result = new ArrayList<>();
+
+        for (Television tv : catalog) {
+            if (tv.getBrand().equals(brand)) {
+                result.add(tv);
+            }
+        }
+        return result;
     }
 
     /**
-     * Searches catalog by one or more brands, and returns a map with an entry for each brand supplied,
-     * with a corresponding collection of matching Televisions for that brand.
+     * Searches catalog by one or more brands, and returns a map with an entry (row)
+     * for each brand supplied, with a corresponding collection of matching Televisions
+     * for that brand.
      * A no-brands-passed result should be an empty map (not null).
+     *
+     * if client says this:
+     *  Catalog.findByBrands("Sony")         'first' will be the Sony, 'rest' will be empty array
+     *  Catalog.findByBrands("Sony", "RCA")  'first' will be the Sony, 'rest' will array of length 1
      */
-    public static Map<String,Collection<Television>> findByBrands(String... brands) {
-        return null;
+    public static Map<String,Collection<Television>> findByBrands(String first, String... rest) {
+        Map<String,Collection<Television>> map = new HashMap<>();
+
+        // 1. call the findByBrand() method with your 'first' - this returns Collection<Television>
+        //    put() the value of 'first' and this collection in the map
+        Collection<Television> firstTvs = findByBrand(first);
+        map.put(first, firstTvs);
+
+        // 2. for-each String in 'rest', call the findByBrand() method, get Collection back
+        //    put() that String and the Collection in the map
+        for (String brand : rest) {
+            Collection<Television> tvs = findByBrand(brand);
+            map.put(brand, tvs);
+        }
+        return map;
     }
 
     /**
