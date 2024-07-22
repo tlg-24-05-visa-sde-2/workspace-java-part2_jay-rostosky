@@ -18,11 +18,11 @@ public class ShoppingCartTest {
      */
     @Test
     public void testProductCart() {
-        ShoppingCart<Product> cart = new ShoppingCart<>();
+        ShoppingCart<Product> cart = new ShoppingCart<>();  // T: Product
         cart.addItem(new MusicItem("CD-501"));
         cart.addItem(new MediaPlayer("MP3-LP150"));
         // sanity check, this qualifies as "too simple to fail"
-        // assertEquals(2, cart.size());
+        assertEquals(2, cart.size());
     }
 
     /**
@@ -34,11 +34,11 @@ public class ShoppingCartTest {
      */
     @Test
     public void testMusicItemCart() {
-        ShoppingCart<MusicItem> cart = new ShoppingCart<>();
+        ShoppingCart<MusicItem> cart = new ShoppingCart<>();  // T: MusicItem
         cart.addItem(new MusicItem("CD-521"));
         cart.addItem(new MusicItem("CD-514"));
         // sanity check, this qualifies as "too simple to fail"
-        // assertEquals(2, cart.size());
+        assertEquals(2, cart.size());
     }
 
     /**
@@ -47,9 +47,9 @@ public class ShoppingCartTest {
      */
     @Test
     public void testMediaPlayerCart() {
-        ShoppingCart<MediaPlayer> cart = new ShoppingCart<>();
+        ShoppingCart<MediaPlayer> cart = new ShoppingCart<>();  // T: MediaPlayer
         cart.addItem(new MediaPlayer("AAC-PL233"));
         // sanity check, this qualifies as "too simple to fail"
-        // assertEquals(1, cart.size());
+        assertEquals(1, cart.size());
     }
 }

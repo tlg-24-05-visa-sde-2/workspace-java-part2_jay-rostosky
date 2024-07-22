@@ -9,7 +9,7 @@
 package com.javatunes.product;
 
 public abstract class Product {
-    private String code;
+    private final String code;
 
     public Product(String code) {
         this.code = code;
