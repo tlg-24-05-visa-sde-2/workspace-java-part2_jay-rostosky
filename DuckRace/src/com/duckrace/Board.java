@@ -63,7 +63,7 @@ class Board {
             racer = new DuckRacer(id, studentIdMap.get(id));  // not in map, create new
             racerMap.put(id, racer);                          // insert it
         }
-        racer.win(reward);
+        racer.win(reward);                                    // make it "win"
     }
 
     /*
