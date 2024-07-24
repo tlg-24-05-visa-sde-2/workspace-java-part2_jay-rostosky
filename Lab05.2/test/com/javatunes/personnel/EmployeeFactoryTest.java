@@ -1,6 +1,7 @@
 package com.javatunes.personnel;
 
 import static org.junit.Assert.*;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
@@ -46,29 +47,60 @@ public class EmployeeFactoryTest {
     }
 
     /**
-     * TASK: verify that passing seMap into your factory returns a SalariedEmployee, with all properties set.
-     * to check an object's type, you can use instanceof or check its Class object (preferred):
+     * TASK: verify that passing seMap into your factory returns a SalariedEmployee,
+     * with all properties set.
+     *
+     * To check an object's type, you can use instanceof or check its Class object (preferred):
      * assertEquals(SalariedEmployee.class, emp.getClass())
      */
     @Test
-    public void testCreateEmployeeSalaried() {
-        // TODO
+    public void createEmployee_shouldReturnSalariedEmployee_whenTypeSE() {
+        Employee emp = EmployeeFactory.createEmployee(seMap);
+
+        // check that 'emp' is EXACTLY type SalariedEmployee
+        assertEquals(SalariedEmployee.class, emp.getClass());
+
+        verifyNameAndHireDate(emp);
+
+        // downcast 'emp' to more specific reference type SalariedEmployee, so
+        // we can call SalariedEmployee-specific methods
+        SalariedEmployee semp = (SalariedEmployee) emp;
+        assertEquals(50_000.0, semp.getSalary(), .001);
+    }
+
+    private static void verifyNameAndHireDate(Employee emp) {
+        assertEquals("Jackie", emp.getName());
+        assertEquals(Date.valueOf("1990-08-24"), emp.getHireDate());
     }
 
     /**
-     * TASK: verify that passing heMap into your factory returns a HourlyEmployee, with all properties set.
+     * TASK: verify that passing heMap into your factory returns a HourlyEmployee,
+     * with all properties set.
      */
     @Test
-    public void testCreateEmployeeHourly() {
-        // TODO
+    public void createEmployee_shouldReturnHourlyEmployee_whenTypeHE() {
+        Employee emp = EmployeeFactory.createEmployee(heMap);
+
+        // check that 'emp' is EXACTLY HourlyEmployee
+        assertEquals(HourlyEmployee.class, emp.getClass());
+
+        verifyNameAndHireDate(emp);
+
+        // downcast 'emp' to more specific reference type HourlyEmployee,
+        // so we can call HourlyEmployee-specific methods
+        HourlyEmployee hemp = (HourlyEmployee) emp;
+        assertEquals(50.0, hemp.getRate(), .001);
+        assertEquals(40.0, hemp.getHours(), .001);
     }
 
     /**
-     * TASK: verify that passing a map with an invalid "type" value results in IllegalArgumentException.
-     * The only valid values for "type" are "HE" or "SE".
+     * TASK: verify that passing a map with an invalid "type" value results in
+     * IllegalArgumentException. The only valid values for "type" are "HE" or "SE".
      */
-    @Test
-    public void testCreateEmployeeInvalidTypeThrowsIllegalArgumentException() {
-        // TODO
+    @Test(expected=IllegalArgumentException.class)
+    public void createEmployee_shouldThrowIllegalArgumentException_invalidType() {
+        seMap.put("type", "INVALID-TYPE");
+
+        EmployeeFactory.createEmployee(seMap);
     }
 }
