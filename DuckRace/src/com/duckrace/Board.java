@@ -72,24 +72,28 @@ public class Board {
      */
     public void show() {
         if (racerMap.isEmpty()) {
-            System.out.println("\nThere are currently no results to show\n");
+            System.out.println("There are currently no results to show\n");
         }
         else {
-            Collection<DuckRacer> racers = racerMap.values();
-
             String header = """
-                
-                Duck Race Results
-                =================
-                
-                id    name      wins    rewards
-                --    ----      ----    -------""";
-            System.out.println(header);
+                    Duck Race Results
+                    =================
+                    
+                    id    name      wins    rewards
+                    --    ----      ----    -------
+                    """;
 
-            for (DuckRacer racer : racers) {
-                System.out.printf("%s     %s     %s      %s\n",
-                        racer.getId(), racer.getName(), racer.getWins(), racer.getRewards());
+            StringBuilder board = new StringBuilder(header);
+
+            for (DuckRacer racer : racerMap.values()) {
+                String rewardsString = racer.getRewards().toString();
+                String rewards = rewardsString.substring(1, rewardsString.length() - 1);
+
+                String row = String.format("%2d    %-9s %4d    %s\n",
+                        racer.getId(), racer.getName(), racer.getWins(), rewards);
+                board.append(row);
             }
+            System.out.println(board);
         }
     }
 
