@@ -1,6 +1,7 @@
 package com.crisp;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 class RadishSortTest {
@@ -30,6 +31,16 @@ class RadishSortTest {
 
         System.out.println("Sort by color, via Comparator");
         radishes.sort(new RadishColorComparator());
+        dump(radishes);
+        System.out.println();
+
+        System.out.println("Sort by tailLength, via anonymous Comparator class");
+        radishes.sort(new Comparator<Radish>() {
+            @Override
+            public int compare(Radish r1, Radish r2) {
+                return Double.compare(r1.getTailLength(), r2.getTailLength());
+            }
+        });
         dump(radishes);
         System.out.println();
     }
