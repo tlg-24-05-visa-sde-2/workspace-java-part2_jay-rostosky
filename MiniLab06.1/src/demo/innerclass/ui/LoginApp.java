@@ -32,7 +32,7 @@ public class LoginApp extends JFrame {
         setFrameOptions();
 
         // NOTE: pass references to my privates that the listener needs to do its job
-        loginButton.addActionListener(new LoginAppListener(nameField, passwordField, messageLabel));
+        loginButton.addActionListener(new InnerListener());
     }
 
     private void buildUI() {
@@ -55,5 +55,25 @@ public class LoginApp extends JFrame {
 
     public static void main(String[] args) {
         new LoginApp().setVisible(true);
+    }
+
+    // NAMED, MEMBER-LEVEL INNER CLASSES
+    private class InnerListener implements ActionListener {
+
+        /**
+         * The heart of an ActionListener - this gets called when the event is fired.
+         * Need to authenticate the user and display appropriate message on the UI.
+         */
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            if ("derek".equals(nameField.getText()) && "smalls".equals(passwordField.getText())) {
+                messageLabel.setText("Login successful!");
+            }
+            else {
+                messageLabel.setText("Sorry, try again");
+            }
+            nameField.setText("");
+            passwordField.setText("");
+        }
     }
 }
