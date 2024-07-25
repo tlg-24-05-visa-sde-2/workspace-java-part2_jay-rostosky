@@ -33,7 +33,7 @@ public class Order {
     public double getTax() {
         TaxCalculator calc = TaxCalculatorFactory.createTaxCalculator(getLocation());
 
-        return calc.taxAmount(getSubtotal());
+        return calc.taxAmount(getSubtotal());  // delegate to the strategy
     }
 
     /**
