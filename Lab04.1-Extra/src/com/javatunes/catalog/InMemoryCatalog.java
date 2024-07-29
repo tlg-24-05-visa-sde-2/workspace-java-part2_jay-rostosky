@@ -75,6 +75,11 @@ public class InMemoryCatalog implements Catalog {
      */
     @Override
     public Collection<MusicItem> findByCategory(MusicCategory category) {
+        return catalogData.stream()
+                .filter(item -> item.getMusicCategory() == category)
+                .toList();
+
+        /*
         Collection<MusicItem> result = new ArrayList<>();
 
         for (MusicItem item : catalogData) {
@@ -83,6 +88,7 @@ public class InMemoryCatalog implements Catalog {
             }
         }
         return result;
+        */
     }
 
     /**
